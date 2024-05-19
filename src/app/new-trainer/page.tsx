@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import {TextField, Button, List, ListItem, ListItemText, Typography, Box, Grid} from '@mui/material';
+import React, {useState} from 'react';
+import {TextField, Button, List, ListItem, ListItemText, Typography, Grid} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 const NewTrainerPage: React.FC = () => {
@@ -20,39 +20,63 @@ const NewTrainerPage: React.FC = () => {
         // Add logic to download images
     };
 
+    const handleSaveCategories = () => {
+        // Add logic to download images
+    };
+
     return (
-        <Box sx={{ padding: 2 }}>
-            <Typography variant="h4">New Trainer</Typography>
-            <TextField
-                label="Trainer Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                sx={{ marginY: 2 }}
-            />
-            <Typography variant="body1">Add categories to your image classifier</Typography>
-            <Grid container alignItems='center'>
+        <Grid sx={{padding: 2}} alignItems='center' justifyContent='center' container>
+            <Grid container alignItems='center' item justifyContent='center' direction='column'>
+                <Typography variant="h4">New Trainer</Typography>
+                <TextField
+                    label="Trainer Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    sx={{marginY: 2}}
+                />
+                <Typography variant="body1">Add categories to your image classifier</Typography>
+            </Grid>
+
+            <Grid container alignItems='center' item justifyContent='center'>
                 <TextField
                     label="Add Category"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    sx={{ marginY: 2 }}
+                    sx={{marginY: 2}}
                 />
                 <Button variant="contained" color="primary" onClick={handleAddCategory}>
-                    <AddIcon />
+                    <AddIcon/>
                 </Button>
             </Grid>
 
             <List>
                 {categories.map((cat, index) => (
                     <ListItem key={index}>
-                        <ListItemText primary={cat} />
+                        <ListItemText primary={cat}/>
                     </ListItem>
                 ))}
             </List>
-            <Button variant="contained" color="secondary" onClick={handleDownloadImages}>
-                Download Images
-            </Button>
-        </Box>
+            <Grid container spacing={2} justifyContent='center'>
+                <Grid item>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleDownloadImages}
+                    >
+                        Save Categories
+                    </Button>
+                </Grid>
+                <Grid item>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={handleDownloadImages}
+                    >
+                        Download Images
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
     );
 };
 
