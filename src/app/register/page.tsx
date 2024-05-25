@@ -10,9 +10,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {registerByMail} from "@/clients/auth.client";
+import {createCookie} from "@/utils/cookies/cookies";
+import {useRouter} from "next/navigation";
 
 
 const RegisterPage: React.FC = () => {
+    const router = useRouter();
+
     const handleSubmit = async (event: any) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -24,11 +28,15 @@ const RegisterPage: React.FC = () => {
         if (typeof username !== 'string') {
             return console.log('username should be string')
         }
+        await createCookie('identifier', email);
         const registerData = {
             email, username
         };
         const response = await registerByMail(registerData)
-        console.log(response.data);
+        if (response.status === 'success') {
+            console.log(response);
+            await router.push('/register/code')
+        }
     };
 
     return (
