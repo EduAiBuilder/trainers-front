@@ -1,6 +1,6 @@
 "use client";
 
-import { verifyRegisterCode} from "@/clients/auth.client";
+import {verifyRegisterCode} from "@/clients/auth.client";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -12,9 +12,11 @@ import Button from "@mui/material/Button";
 import * as React from "react";
 import {getCookie} from "@/utils/cookies/cookies";
 import {useRouter} from "next/navigation";
+import {useAppContext} from "@/context";
 
 const RegisterCodePage = () => {
     const router = useRouter();
+    const {setUser} = useAppContext();
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
@@ -32,7 +34,7 @@ const RegisterCodePage = () => {
         };
         const user = await verifyRegisterCode(registerVerifyData)
         if (user?._id) {
-            console.log(user);
+            setUser(user);
             await router.push('/trainers')
         }
     };

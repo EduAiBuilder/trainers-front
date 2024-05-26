@@ -1,6 +1,7 @@
 "use client"
 
 import Header from "@/components/Header/Header";
+import {ContextWrapper} from "@/context";
 
 
 export default function RootLayout({
@@ -11,8 +12,10 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body>
-        <Header/>
+        <ContextWrapper>
+            <Header/>
             {children}
+        </ContextWrapper>
         </body>
         </html>
     )
