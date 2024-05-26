@@ -12,9 +12,19 @@ export const registerByMail = async (registerData: { email: string, username: st
     }
 };
 
-export const verifyRegisterCode = async (verifyCodeData: { code: string, identifier: string }) => {
+export const loginByMail = async (loginData: { email: string }) => {
     try{
-        const endpoint = `${BACKEND_BASE_URL}/${Endpoints.REGISTER_VERIFY_CODE}`;
+        const endpoint = `${BACKEND_BASE_URL}/${Endpoints.LOGIN_BY_EMAIL}`;
+        const response = await Axios.post(endpoint, loginData);
+        return response?.data;
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+export const verifyCode = async (verifyCodeData: { code: string, identifier: string }, endpointPath: Endpoints) => {
+    try{
+        const endpoint = `${BACKEND_BASE_URL}/${endpointPath}`;
         const response = await Axios.post(endpoint, verifyCodeData);
         return response?.data;
     } catch (e) {

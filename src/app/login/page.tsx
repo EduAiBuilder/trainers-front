@@ -11,21 +11,34 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import {useRouter} from "next/navigation";
+import {loginByMail} from "@/clients/auth.client";
+import {createCookie} from "@/utils/cookies/cookies";
 
 
 const LoginPage: React.FC = () => {
-    const handleSubmit = (event: any) => {
+    const router = useRouter();
+
+    const handleSubmit = async (event: any) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const email = data.get('email')
+        if (typeof email !== 'string') {
+            return console.log('email should be string')
+        }
+        await createCookie('identifier', email);
+        const registerData = {
+            email
+        };
+        const response = await loginByMail(registerData)
+        if (response.status === 'success') {
+            console.log(response);
+            await router.push('/login/code')
+        }
     };
 
     return (
         <>
-            {/* eslint-disable-next-line react/jsx-no-undef */}
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <Box
@@ -42,17 +55,7 @@ const LoginPage: React.FC = () => {
                     <Typography component="h1" variant="h5">
                         Sign In
                     </Typography>
-                    <Box component="form" onSubmit={(event)=>handleSubmit(event)} noValidate sx={{mt: 1}}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="username"
-                            label="User Name"
-                            type="username"
-                            id="username"
-                            autoComplete="current-password"
-                        />
+                    <Box component="form" onSubmit={(event) => handleSubmit(event)} noValidate sx={{mt: 1}}>
                         <TextField
                             margin="normal"
                             required
