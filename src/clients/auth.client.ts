@@ -3,7 +3,7 @@ import {Endpoints} from "@/app/enums/endpoints";
 
 const BACKEND_BASE_URL = 'http://localhost:3200';
 export const registerByMail = async (registerData: { email: string, username: string }) => {
-    try{
+    try {
         const endpoint = `${BACKEND_BASE_URL}/${Endpoints.REGISTER_BY_EMAIL}`;
         const response = await Axios.post(endpoint, registerData);
         return response?.data;
@@ -13,7 +13,7 @@ export const registerByMail = async (registerData: { email: string, username: st
 };
 
 export const loginByMail = async (loginData: { email: string }) => {
-    try{
+    try {
         const endpoint = `${BACKEND_BASE_URL}/${Endpoints.LOGIN_BY_EMAIL}`;
         const response = await Axios.post(endpoint, loginData);
         return response?.data;
@@ -23,9 +23,9 @@ export const loginByMail = async (loginData: { email: string }) => {
 };
 
 export const verifyCode = async (verifyCodeData: { code: string, identifier: string }, endpointPath: Endpoints) => {
-    try{
+    try {
         const endpoint = `${BACKEND_BASE_URL}/${endpointPath}`;
-        const response = await Axios.post(endpoint, verifyCodeData);
+        const response = await Axios.post(endpoint, verifyCodeData,{ withCredentials: true });
         return response?.data;
     } catch (e) {
         console.error(e);
