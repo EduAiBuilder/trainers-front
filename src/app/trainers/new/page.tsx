@@ -3,6 +3,7 @@
 import React, {useState} from 'react';
 import {TextField, Button, List, ListItem, ListItemText, Typography, Grid} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import {createTrainer} from "@/clients/trainers.client";
 
 const NewTrainerPage: React.FC = () => {
     const [category, setCategory] = useState('');
@@ -20,8 +21,8 @@ const NewTrainerPage: React.FC = () => {
         // Add logic to download images
     };
 
-    const handleSaveCategories = () => {
-        // Add logic to download images
+    const handleSaveCategories = async () => {
+        await createTrainer({name, categories})
     };
 
     return (
@@ -61,7 +62,7 @@ const NewTrainerPage: React.FC = () => {
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={handleDownloadImages}
+                        onClick={handleSaveCategories}
                     >
                         Save Categories
                     </Button>

@@ -1,6 +1,6 @@
 "use client";
 
-import {createContext, useContext, useState} from "react";
+import React, {createContext, useContext, useState} from "react";
 import {UserInterface} from "@/interfaces/user.interface";
 import {TrainerInterface} from "@/interfaces/trainer.interface";
 
@@ -14,7 +14,7 @@ interface AppContextInterface {
 const AppContext = createContext<AppContextInterface>(null as any);
 
 export const ContextWrapper = ({children}: {
-    children: any
+    children: React.ReactNode
 }) => {
     const [user, setUser] = useState<UserInterface>(null as any)
     const [trainers, setTrainers] = useState<TrainerInterface[]>([])

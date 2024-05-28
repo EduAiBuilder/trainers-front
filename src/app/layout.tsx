@@ -2,6 +2,7 @@
 
 import Header from "@/components/Header/Header";
 import {ContextWrapper} from "@/context";
+import React, {useEffect} from "react";
 
 
 export default function RootLayout({
@@ -9,6 +10,9 @@ export default function RootLayout({
                                    }: {
     children: React.ReactNode
 }) {
+    useEffect(() => {
+
+    }, [])
     return (
         <html lang="en">
         <body>
