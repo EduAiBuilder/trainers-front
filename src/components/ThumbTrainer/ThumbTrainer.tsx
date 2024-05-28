@@ -1,14 +1,13 @@
 interface Props {
-    trainerName: string
+	trainerName: string;
 }
 
-const ThumbTrainer = ({trainerName}:Props) =>{
-    return (
-        <>
+const ThumbTrainer = ({ trainerName }: Props) => {
+	return (
+		<>
+			<h6>{trainerName}</h6>
+		</>
+	);
+};
 
-            <h6>{trainerName}</h6>
-        </>
-    )
-}
-
-export default ThumbTrainer
+export default ThumbTrainer;

@@ -1,8 +1,8 @@
 export interface TrainerInterface {
-    _id?: string;
-    name: string;
-    description: string;
-    categories: string[]
-    createdAt: string,
-    updatedAt: string,
+	_id?: string;
+	name: string;
+	description: string;
+	categories: string[];
+	createdAt: string;
+	updatedAt: string;
 }
