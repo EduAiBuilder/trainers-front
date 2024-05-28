@@ -4,11 +4,14 @@ import React, {useState} from 'react';
 import {TextField, Button, List, ListItem, ListItemText, Typography, Grid} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {createTrainer} from "@/clients/trainers.client";
+import {useRouter} from "next/navigation";
 
 const NewTrainerPage: React.FC = () => {
     const [category, setCategory] = useState('');
     const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
     const [categories, setCategories] = useState<string[]>([]);
+    const router = useRouter();
 
     const handleAddCategory = () => {
         if (category && categories.length < 6 && !categories.includes(category)) {
@@ -17,12 +20,11 @@ const NewTrainerPage: React.FC = () => {
         }
     };
 
-    const handleDownloadImages = () => {
-        // Add logic to download images
-    };
-
-    const handleSaveCategories = async () => {
-        await createTrainer({name, categories})
+    const handleSaveTrainer = async () => {
+        const response = await createTrainer({name, description, categories})
+        if (response?._id) {
+            await router.push('/trainers/new')
+        }
     };
 
     return (
@@ -33,6 +35,11 @@ const NewTrainerPage: React.FC = () => {
                     label="Trainer Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                />
+                <TextField
+                    label="Description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     sx={{marginY: 2}}
                 />
                 <Typography variant="body1">Add categories to your image classifier</Typography>
@@ -62,18 +69,9 @@ const NewTrainerPage: React.FC = () => {
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={handleSaveCategories}
+                        onClick={handleSaveTrainer}
                     >
-                        Save Categories
-                    </Button>
-                </Grid>
-                <Grid item>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={handleDownloadImages}
-                    >
-                        Download Images
+                        Save
                     </Button>
                 </Grid>
             </Grid>
