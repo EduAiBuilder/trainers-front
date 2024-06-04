@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button, Grid, List, ListItem, ListItemText, TextField, Typography } from '@mui/material';
+import { Button, Grid, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { createTrainer } from '@/clients/trainers.client';
 import { useRouter } from 'next/navigation';
@@ -42,14 +42,7 @@ const NewTrainerPage: React.FC = () => {
 					<AddIcon />
 				</Button>
 			</Grid>
-
-			<List>
-				{categories.map((cat, index) => (
-					<ListItem key={index}>
-						<ListItemText primary={cat} />
-					</ListItem>
-				))}
-			</List>
+			<Typography variant="body1">{categories.join(', ')}</Typography>
 			<Grid container spacing={2} justifyContent="center">
 				<Grid item>
 					<Button variant="contained" color="primary" onClick={handleSaveTrainer}>

@@ -3,6 +3,6 @@ export interface TrainerInterface {
 	name: string;
 	description: string;
 	categories: string[];
-	createdAt: string;
-	updatedAt: string;
+	createdAt?: string;
+	updatedAt?: string;
 }
