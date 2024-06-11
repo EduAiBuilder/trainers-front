@@ -7,14 +7,14 @@ import { useEffect, useState } from 'react';
 import { ImageInterface } from '@/interfaces/image.interface';
 import { getTrainerImages } from '@/clients/trainers.client';
 
-const TrainerCard = ({ name, _id, categories, description, updatedAt }: TrainerInterface) => {
+const TrainerCard = ({ name, id, categories, description, updatedAt }: TrainerInterface) => {
 	const [images, setImages] = useState<ImageInterface[]>([]);
 	useEffect(() => {
-		if (!_id) {
+		if (!id) {
 			return;
 		}
 		(async () => {
-			const response = await getTrainerImages(_id, categories, 1, 10);
+			const response = await getTrainerImages(id, categories, 1, 10, true);
 			if (response) {
 				setImages(response);
 			}
@@ -22,7 +22,7 @@ const TrainerCard = ({ name, _id, categories, description, updatedAt }: TrainerI
 	}, []);
 	return (
 		<Card sx={{ padding: 2 }}>
-			<CardHeader title={name} subheader={categories.join(', ')} />
+			<CardHeader title={name} subheader={categories?.join(', ')} />
 			<TrainersMenuImages images={images} />
 			<CardContent>
 				<Typography variant="body1">{description}</Typography>

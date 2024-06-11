@@ -1,5 +1,5 @@
 export interface TrainerInterface {
-	_id?: string;
+	id?: number;
 	name: string;
 	description: string;
 	categories: string[];
