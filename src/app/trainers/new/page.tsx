@@ -1,57 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Button, Grid, TextField, Typography } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import React from 'react';
 import { createTrainer } from '@/clients/trainers.client';
 import { useRouter } from 'next/navigation';
+import TrainersSettingsForm from '@/components/TrainerSettingsForm/TrainersSettingsForm';
 
 const NewTrainerPage: React.FC = () => {
-	const [category, setCategory] = useState('');
-	const [name, setName] = useState('');
-	const [description, setDescription] = useState('');
-	const [categories, setCategories] = useState<string[]>([]);
 	const router = useRouter();
-
-	const handleAddCategory = () => {
-		if (category && categories.length < 6 && !categories.includes(category)) {
-			setCategories([...categories, category]);
-			setCategory('');
-		}
-	};
-
-	const handleSaveTrainer = async () => {
-		const response = await createTrainer({ name, description, categories });
+	const handleSaveTrainer = async (trainer: { name: string; description: string; categories: string[] }) => {
+		const response = await createTrainer(trainer);
 		if (response?._id) {
-			await router.push('/trainers/new');
+			await router.push('/trainers');
 		}
 	};
 
-	return (
-		<Grid sx={{ padding: 2 }} alignItems="center" justifyContent="center" container>
-			<Grid container alignItems="center" item justifyContent="center" direction="column">
-				<Typography variant="h4">New Trainer</Typography>
-				<TextField label="Trainer Name" value={name} onChange={(e) => setName(e.target.value)} />
-				<TextField label="Description" value={description} onChange={(e) => setDescription(e.target.value)} sx={{ marginY: 2 }} />
-				<Typography variant="body1">Add categories to your image classifier</Typography>
-			</Grid>
-
-			<Grid container alignItems="center" item justifyContent="center">
-				<TextField label="Add Category" value={category} onChange={(e) => setCategory(e.target.value)} sx={{ marginY: 2 }} />
-				<Button variant="contained" color="primary" onClick={handleAddCategory}>
-					<AddIcon />
-				</Button>
-			</Grid>
-			<Typography variant="body1">{categories.join(', ')}</Typography>
-			<Grid container spacing={2} justifyContent="center">
-				<Grid item>
-					<Button variant="contained" color="primary" onClick={handleSaveTrainer}>
-						Save
-					</Button>
-				</Grid>
-			</Grid>
-		</Grid>
-	);
+	return <TrainersSettingsForm setSaveTrainer={handleSaveTrainer} />;
 };
 
 export default NewTrainerPage;
