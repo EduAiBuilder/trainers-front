@@ -25,11 +25,11 @@ export const getTrainers = async () => {
 	}
 };
 
-export const getTrainerImages = async (trainerId: string, categories: string[], page: number, pageNumber: number) => {
+export const getTrainerImages = async (trainerId: number, categories: string[], page: number, pageNumber: number, isRandomRequired: boolean) => {
 	try {
 		const response = await Axios.get(`${BACKEND_BASE_URL}/${Endpoints.TRAINERS}/${trainerId}/images`, {
 			withCredentials: true,
-			params: { categories, page, pageNumber },
+			params: { categories, page, pageNumber, isRandomRequired },
 			headers: { Authorization: `Bearer ${await getCookie('accessToken')}` },
 		});
 		return response?.data;
