@@ -37,7 +37,7 @@ const VerifyCodeForm = ({ endpointPath }: Props) => {
 			code,
 		};
 		const user = await verifyCode(registerVerifyData, endpointPath);
-		if (user?._id) {
+		if (user?.id) {
 			setUser(user);
 			await router.push('/trainers');
 		}

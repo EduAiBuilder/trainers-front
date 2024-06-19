@@ -9,7 +9,7 @@ const NewTrainerPage: React.FC = () => {
 	const router = useRouter();
 	const handleSaveTrainer = async (trainer: { name: string; description: string; categories: string[] }) => {
 		const response = await createTrainer(trainer);
-		if (response?._id) {
+		if (response?.id) {
 			await router.push('/trainers');
 		}
 	};

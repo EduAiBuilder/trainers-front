@@ -24,7 +24,7 @@ const TrainersPage = () => {
 			<h3>Trainers</h3>
 			<>
 				{trainers?.map((trainer) => (
-					<TrainerCard {...trainer} key={trainer._id} />
+					<TrainerCard {...trainer} key={trainer.id} />
 				))}
 			</>
 			<IconButton
