@@ -1,3 +1,18 @@
+# Trainers Front App 
+
+## Frontend App for Trainers Management**
+- **Goal**: Empower users to manage and configure AI trainers.
+- **Technologies**: Built with Next.js, React, and TypeScript.
+- **Features**:
+- User authentication
+- CRUD operations for trainers
+- Image collection and management
+- Real-time monitoring and exporting of trained models
+
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
