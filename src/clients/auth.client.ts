@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import { Endpoints } from '@/app/enums/endpoints';
+import { BACKEND_BASE_URL } from '@/utils/config/config';
 
-const BACKEND_BASE_URL = 'http://localhost:3300';
 export const registerByMail = async (registerData: { email: string; username: string }) => {
 	try {
 		const endpoint = `${BACKEND_BASE_URL}/${Endpoints.REGISTER_BY_EMAIL}`;

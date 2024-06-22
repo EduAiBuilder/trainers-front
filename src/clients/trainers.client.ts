@@ -2,8 +2,7 @@ import Axios from 'axios';
 import { TrainerInterface } from '@/interfaces/trainer.interface';
 import { Endpoints } from '@/app/enums/endpoints';
 import { getCookie } from '@/utils/cookies/cookies';
-
-const BACKEND_BASE_URL = 'http://localhost:3300';
+import { BACKEND_BASE_URL } from '@/utils/config/config';
 
 export const createTrainer = async (trainer: TrainerInterface) => {
 	const response = await Axios.post(`${BACKEND_BASE_URL}/${Endpoints.TRAINERS}`, trainer, {
