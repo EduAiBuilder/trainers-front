@@ -24,7 +24,7 @@ export const getTrainers = async () => {
 	}
 };
 
-export const getTrainerImages = async (trainerId: number, categories: string[], page: number, pageNumber: number, isRandomRequired: boolean) => {
+export const getTrainerImages = async (trainerId: number, categories: number[], page: number, pageNumber: number, isRandomRequired: boolean) => {
 	try {
 		const response = await Axios.get(`${BACKEND_BASE_URL}/${Endpoints.TRAINERS}/${trainerId}/images`, {
 			withCredentials: true,

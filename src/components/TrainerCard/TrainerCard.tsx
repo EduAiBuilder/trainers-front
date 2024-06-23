@@ -14,7 +14,8 @@ const TrainerCard = ({ name, id, categories, description, updatedAt }: TrainerIn
 			return;
 		}
 		(async () => {
-			const response = await getTrainerImages(id, categories, 1, 10, true);
+			const categoriesIds = categories.map((category) => category.id);
+			const response = await getTrainerImages(id, categoriesIds, 1, 10, true);
 			if (response) {
 				setImages(response);
 			}
@@ -22,7 +23,7 @@ const TrainerCard = ({ name, id, categories, description, updatedAt }: TrainerIn
 	}, []);
 	return (
 		<Card sx={{ padding: 2 }}>
-			<CardHeader title={name} subheader={categories?.join(', ')} />
+			<CardHeader title={name} subheader={categories?.map((category) => category.name).join(', ')} />
 			<TrainersMenuImages images={images} />
 			<CardContent>
 				<Typography variant="body1">{description}</Typography>
