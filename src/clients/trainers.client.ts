@@ -36,3 +36,19 @@ export const getTrainerImages = async (trainerId: number, categories: number[], 
 		console.error(e);
 	}
 };
+
+export const trainModel = async (trainerId: number) => {
+	try {
+		const response = await Axios.post(
+			`${BACKEND_BASE_URL}/${Endpoints.TRAINERS}/${trainerId}/train`,
+			{},
+			{
+				withCredentials: true,
+				headers: { Authorization: `Bearer ${await getCookie('accessToken')}` },
+			}
+		);
+		return response?.data;
+	} catch (e) {
+		console.error(e);
+	}
+};

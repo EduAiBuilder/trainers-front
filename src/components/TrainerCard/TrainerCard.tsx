@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import TrainersMenuImages from '@/components/TrainersMenuImages/TrainersMenuImages';
 import { useEffect, useState } from 'react';
 import { ImageInterface } from '@/interfaces/image.interface';
-import { getTrainerImages } from '@/clients/trainers.client';
+import { getTrainerImages, trainModel } from '@/clients/trainers.client';
 
 const TrainerCard = ({ name, id, categories, description, updatedAt }: TrainerInterface) => {
 	const [images, setImages] = useState<ImageInterface[]>([]);
@@ -21,6 +21,14 @@ const TrainerCard = ({ name, id, categories, description, updatedAt }: TrainerIn
 			}
 		})();
 	}, []);
+
+	const handleTrainClick = async () => {
+		if (!id) {
+			return;
+		}
+		await trainModel(id);
+	};
+
 	return (
 		<Card sx={{ padding: 2 }}>
 			<CardHeader title={name} subheader={categories?.map((category) => category.name).join(', ')} />
@@ -33,6 +41,9 @@ const TrainerCard = ({ name, id, categories, description, updatedAt }: TrainerIn
 				</Box>
 				<CardActions>
 					<Button size="small">Update</Button>
+					<Button size="small" onClick={handleTrainClick}>
+						Train
+					</Button>
 				</CardActions>
 			</CardContent>
 		</Card>
